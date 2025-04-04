@@ -8,7 +8,7 @@
   "scripts": {
     "build": "nest build",
     "build:all": "nest build admin && nest build auth && nest build mobile && nest build sync",
-    "start:prod:all": "pnpm build:all && concurrently -n \"admin,auth,mobile,sync\" -c \"red.bold,green.bold,yellow.bold,magenta.bold\" \"node dist/apps/admin/main.js\" \"node dist/apps/auth/main.js\" \"node dist/apps/mobile/main.js\" \"node dist/apps/sync/main.js\"",
+    "start:prod:all": "concurrently -n \"admin,auth,mobile,sync\" -c \"red.bold,green.bold,yellow.bold,magenta.bold\" \"node dist/apps/admin/main.js\" \"node dist/apps/auth/main.js\" \"node dist/apps/mobile/main.js\" \"node dist/apps/sync/main.js\"",
     "start:dev:all": "concurrently -n \"admin,auth,mobile,sync\" -c \"blue.bold,green.bold,yellow.bold,magenta.bold\" \"pnpm start:dev admin\" \"pnpm start:dev auth\" \"pnpm start:dev mobile\" \"pnpm start:dev sync\"",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
