@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/biz-api/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/biz-api/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/biz-api",
+  "projects": {
+    "admin": {
+      "type": "application",
+      "root": "apps/admin",
+      "entryFile": "main",
+      "sourceRoot": "apps/admin/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/admin/tsconfig.app.json"
+      }
+    },
+    "auth": {
+      "type": "application",
+      "root": "apps/auth",
+      "entryFile": "main",
+      "sourceRoot": "apps/auth/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/auth/tsconfig.app.json"
+      }
+    },
+    "biz-api": {
+      "type": "application",
+      "root": "apps/biz-api",
+      "entryFile": "main",
+      "sourceRoot": "apps/biz-api/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/biz-api/tsconfig.app.json"
+      }
+    },
+    "mobile": {
+      "type": "application",
+      "root": "apps/mobile",
+      "entryFile": "main",
+      "sourceRoot": "apps/mobile/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/mobile/tsconfig.app.json"
+      }
+    },
+    "sync": {
+      "type": "application",
+      "root": "apps/sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/sync/tsconfig.app.json"
+      }
+    }
+  }
+}
