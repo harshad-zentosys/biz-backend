@@ -66,7 +66,7 @@ export class AuthService {
     const otp = generateOTP();
 
     // ✅ Store OTP in Redis with a short expiry if not in development environment
-    if (process.env.NODE_ENV !== 'dev') {
+    if (process.env.NODE_ENV as string === 'prod') {
       await this.redisService.set(`otp:code:${mobile}`, otp, this.OTP_WINDOW);
     }
 
