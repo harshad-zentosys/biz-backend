@@ -1,0 +1,30 @@
+# Use Node.js base image
+FROM node:20-alpine
+
+# Install pnpm
+RUN npm install -g pnpm 
+
+# Set working directory
+WORKDIR /app
+
+# Copy only package.json and lock file first (to improve build cache)
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile 
+
+# Copy the entire project, except ignored files
+COPY . .
+
+# Expose the required ports
+EXPOSE 3001 3002 3003 3004
+
+# Start all services in development mode
+CMD ["pnpm", "run", "start:dev:all"]
+
+# command to build the image
+# docker build -t my-app-dev -f Dockerfile.dev . 
+
+# command to run the container
+# docker run --env-file .env -p 3001:3001 -p 3002:3002 -p 3003:3003 -p 3004:3004 my-app-dev
+
