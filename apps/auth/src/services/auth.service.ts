@@ -26,7 +26,7 @@ export class AuthService {
     return jwt.sign({ deviceId, mobile: mobileString }, process.env.JWT_SECRET as string, { expiresIn });
   }
 
-  private generateJwtTokenForLogin(userId: string, mobile: number, expiresIn: jwt.SignOptions['expiresIn'] = '1d'): string {
+  private generateJwtTokenForLogin(userId: string, mobile: number, expiresIn: jwt.SignOptions['expiresIn'] = '365d'): string {
     const mobileString = mobile.toString();
     return jwt.sign({ userId, mobile: mobileString }, process.env.JWT_SECRET as string, { expiresIn });
   }
@@ -65,8 +65,10 @@ export class AuthService {
 
     const otp = generateOTP();
 
-    // // ✅ Store OTP in Redis with a short expiry
-    // await this.redisService.set(`otp:code:${mobile}`, otp, this.OTP_WINDOW);
+    // ✅ Store OTP in Redis with a short expiry if not in development environment
+    if (process.env.NODE_ENV !== 'dev') {
+      await this.redisService.set(`otp:code:${mobile}`, otp, this.OTP_WINDOW);
+    }
 
     console.log(`OTP Sent: ${otp}`);
     return otp;
