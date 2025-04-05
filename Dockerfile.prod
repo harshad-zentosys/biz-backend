@@ -36,5 +36,5 @@ WORKDIR /app
 
 EXPOSE 80
 
-# Start all services and nginx
-CMD sh -c "pnpm start:prod:all & nginx -g 'daemon off;'"
+# Start NGINX first, then start the NestJS services
+CMD sh -c "nginx -g 'daemon off;' & sleep 2 && pnpm start:prod:all"
